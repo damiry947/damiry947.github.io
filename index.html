@@ -1,1 +1,428 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио проектов GitHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #161b22;
+            padding: 30px 0;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: #58a6ff;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .github-link {
+            color: #58a6ff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .github-link:hover {
+            background-color: #1f6feb;
+            color: white;
+            border-color: #1f6feb;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #f0f6fc;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #8b949e;
+        }
+        
+        /* Projects Section */
+        .projects {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #f0f6fc;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #58a6ff;
+            margin: 10px auto;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: #161b22;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: #58a6ff;
+        }
+        
+        .project-header {
+            padding: 25px 25px 15px;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .project-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #58a6ff;
+        }
+        
+        .project-description {
+            color: #8b949e;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .project-details {
+            padding: 20px 25px;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tech-tag {
+            background-color: #13233a;
+            color: #58a6ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid #30363d;
+        }
+        
+        .project-links {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #238636;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2ea043;
+        }
+        
+        .btn-secondary {
+            background-color: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #30363d;
+            border-color: #8b949e;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #161b22;
+            padding: 30px 0;
+            border-top: 1px solid #30363d;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: #8b949e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #58a6ff;
+        }
+        
+        .copyright {
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fab fa-github"></i>
+                    <h1>Портфолио проектов</h1>
+                </div>
+                <a href="https://github.com/damiry947" class="github-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                    Мой GitHub
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Привет, я Damir</h2>
+            <p>Здесь представлены мои проекты на GitHub, посвященные разработке на Java. Каждый проект демонстрирует различные аспекты программирования - от приложений для рабочего стола до тематических проектов о космосе.</p>
+            <a href="#projects" class="btn btn-primary">
+                <i class="fas fa-arrow-down"></i>
+                Смотреть проекты
+            </a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Мои проекты</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Java Application</h3>
+                        <p class="project-description">
+                            Полноценное Java-приложение с графическим интерфейсом пользователя. 
+                            Проект демонстрирует принципы объектно-ориентированного программирования и работу с библиотеками Java.
+                        </p>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">GUI</span>
+                            <span class="tech-tag">ООП</span>
+                            <span class="tech-tag">Desktop App</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/damiry947/Java-application" class="btn btn-primary" target="_blank">
+                                <i class="fab fa-github"></i>
+                                Код на GitHub
+                            </a>
+                            <a href="https://github.com/damiry947/Java-application/archive/refs/heads/main.zip" class="btn btn-secondary">
+                                <i class="fas fa-download"></i>
+                                Скачать
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Java An App About Space</h3>
+                        <p class="project-description">
+                            Тематическое приложение о космосе, написанное на Java. 
+                            Проект включает интерактивные элементы, связанные с астрономией и исследованием космического пространства.
+                        </p>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Космос</span>
+                            <span class="tech-tag">Интерактив</span>
+                            <span class="tech-tag">Научный</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/damiry947/Java-An-app-about-space" class="btn btn-primary" target="_blank">
+                                <i class="fab fa-github"></i>
+                                Код на GitHub
+                            </a>
+                            <a href="https://github.com/damiry947/Java-An-app-about-space/archive/refs/heads/main.zip" class="btn btn-secondary">
+                                <i class="fas fa-download"></i>
+                                Скачать
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Lokal Hub</h3>
+                        <p class="project-description">
+                            Локальный хаб для управления проектами или ресурсами. 
+                            Приложение предназначено для организации работы в локальной сети или на одном компьютере.
+                        </p>
+                    </div>
+                    <div class="project-details">
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Локальная сеть</span>
+                            <span class="tech-tag">Управление</span>
+                            <span class="tech-tag">Хаб</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/damiry947/lokal-hub" class="btn btn-primary" target="_blank">
+                                <i class="fab fa-github"></i>
+                                Код на GitHub
+                            </a>
+                            <a href="https://github.com/damiry947/lokal-hub/archive/refs/heads/main.zip" class="btn btn-secondary">
+                                <i class="fas fa-download"></i>
+                                Скачать
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://github.com/damiry947" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+                <p class="copyright">
+                    © 2023 Damir. Все проекты доступны под открытыми лицензиями.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка к секции проектов
+        document.querySelector('.btn-primary[href="#projects"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#projects').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // Добавление анимации при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+        });
+    </script>
+</body>
+</html>
