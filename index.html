@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио проектов GitHub</title>
+    <title>Портфолио проектов GitHub - damiry947</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -52,6 +52,11 @@
         .logo h1 {
             font-size: 1.8rem;
             font-weight: 600;
+        }
+        
+        .username {
+            color: #58a6ff;
+            font-weight: bold;
         }
         
         .github-link {
@@ -150,6 +155,27 @@
             color: #58a6ff;
         }
         
+        .project-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .status-development {
+            background-color: rgba(56, 139, 253, 0.1);
+            color: #58a6ff;
+            border: 1px solid #58a6ff;
+        }
+        
+        .status-released {
+            background-color: rgba(46, 160, 67, 0.1);
+            color: #3fb950;
+            border: 1px solid #3fb950;
+        }
+        
         .project-description {
             color: #8b949e;
             font-size: 0.95rem;
@@ -195,18 +221,18 @@
             color: #58a6ff;
         }
         
-        .license-copyright {
-            background-color: rgba(127, 127, 127, 0.1);
-            border-left: 4px solid #7d8590;
-            color: #8b949e;
-        }
-        
         .license-label {
             display: flex;
             align-items: center;
             gap: 6px;
             font-weight: 600;
             margin-bottom: 5px;
+        }
+        
+        .license-details {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            color: #8b949e;
         }
         
         .project-links {
@@ -285,6 +311,11 @@
             font-weight: bold;
         }
         
+        .username-footer {
+            color: #58a6ff;
+            font-weight: bold;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -318,7 +349,10 @@
             <div class="header-content">
                 <div class="logo">
                     <i class="fab fa-github"></i>
-                    <h1>Портфолио проектов</h1>
+                    <div>
+                        <h1>Портфолио проектов</h1>
+                        <div class="username">damiry947</div>
+                    </div>
                 </div>
                 <a href="https://github.com/damiry947" class="github-link" target="_blank">
                     <i class="fab fa-github"></i>
@@ -331,8 +365,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2>Привет, я Damir</h2>
-            <p>Здесь представлены мои проекты на GitHub, посвященные разработке на Java. Каждый проект демонстрирует различные аспекты программирования - от приложений для рабочего стола до тематических проектов о космосе.</p>
+            <h2>Привет, я <span class="username">damiry947</span></h2>
+            <p>Здесь представлены мои Java-проекты с GitHub. Специализируюсь на создании desktop-приложений с графическим интерфейсом и интересных тематических проектах.</p>
             <p>Текущий год: <span class="current-year">2026</span></p>
             <a href="#projects" class="btn btn-primary">
                 <i class="fas fa-arrow-down"></i>
@@ -350,9 +384,10 @@
                 <div class="project-card">
                     <div class="project-header">
                         <h3>Java Application</h3>
+                        <div class="project-status status-development">В разработке</div>
                         <p class="project-description">
                             Полноценное Java-приложение с графическим интерфейсом пользователя. 
-                            Проект демонстрирует принципы объектно-ориентированного программирования и работу с библиотеками Java.
+                            Проект в активной разработке, демонстрирует принципы объектно-ориентированного программирования и работу с библиотеками Java.
                         </p>
                     </div>
                     <div class="project-details">
@@ -361,14 +396,18 @@
                             <span class="tech-tag">GUI</span>
                             <span class="tech-tag">ООП</span>
                             <span class="tech-tag">Desktop App</span>
+                            <span class="tech-tag">В разработке</span>
                         </div>
                         
-                        <div class="license-info license-copyright">
+                        <div class="license-info license-proprietary">
                             <div class="license-label">
-                                <i class="fas fa-copyright"></i>
-                                <span>Лицензия: Copyright</span>
+                                <i class="fas fa-lock"></i>
+                                <span>Проприетарная лицензия</span>
                             </div>
-                            <div>Все права защищены. Требуется разрешение для использования.</div>
+                            <div>Copyright © <span class="year-highlight">2026</span> <span class="username">damiry947</span>. Все права защищены.</div>
+                            <div class="license-details">
+                                Распространение и использование строго запрещены без письменного разрешения.
+                            </div>
                         </div>
                         
                         <div class="project-links">
@@ -388,6 +427,7 @@
                 <div class="project-card">
                     <div class="project-header">
                         <h3>Java An App About Space</h3>
+                        <div class="project-status status-released">Выпущено</div>
                         <p class="project-description">
                             Тематическое приложение о космосе, написанное на Java. 
                             Проект включает интерактивные элементы, связанные с астрономией и исследованием космического пространства.
@@ -399,15 +439,18 @@
                             <span class="tech-tag">Космос</span>
                             <span class="tech-tag">Интерактив</span>
                             <span class="tech-tag">Научный</span>
+                            <span class="tech-tag">GUI</span>
                         </div>
                         
                         <div class="license-info license-proprietary">
                             <div class="license-label">
                                 <i class="fas fa-lock"></i>
-                                <span>Лицензия: Проприетарная</span>
+                                <span>Проприетарная лицензия</span>
                             </div>
-                            <div>Copyright © <span class="year-highlight">2026</span> damiry947. Все права защищены.</div>
-                            <div><small>Распространение и использование строго запрещены без письменного разрешения.</small></div>
+                            <div>Copyright © <span class="year-highlight">2026</span> <span class="username">damiry947</span>. Все права защищены.</div>
+                            <div class="license-details">
+                                Распространение и использование строго запрещены без письменного разрешения.
+                            </div>
                         </div>
                         
                         <div class="project-links">
@@ -427,9 +470,11 @@
                 <div class="project-card">
                     <div class="project-header">
                         <h3>Lokal Hub</h3>
+                        <div class="project-status status-released">Выпущено</div>
                         <p class="project-description">
                             Локальный хаб для управления проектами или ресурсами. 
                             Приложение предназначено для организации работы в локальной сети или на одном компьютере.
+                            Открытая лицензия MIT позволяет свободное использование.
                         </p>
                     </div>
                     <div class="project-details">
@@ -438,14 +483,18 @@
                             <span class="tech-tag">Локальная сеть</span>
                             <span class="tech-tag">Управление</span>
                             <span class="tech-tag">Хаб</span>
+                            <span class="tech-tag">MIT License</span>
                         </div>
                         
                         <div class="license-info license-mit">
                             <div class="license-label">
                                 <i class="fas fa-unlock"></i>
-                                <span>Лицензия: MIT</span>
+                                <span>Лицензия MIT</span>
                             </div>
                             <div>Открытая лицензия. Свободное использование, изменение и распространение с указанием авторства.</div>
+                            <div class="license-details">
+                                Разрешено: копирование, модификация, распространение, коммерческое использование.
+                            </div>
                         </div>
                         
                         <div class="project-links">
@@ -470,17 +519,17 @@
             <div class="footer-content">
                 <div class="footer-links">
                     <a href="https://github.com/damiry947" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
+                        <i class="fab fa-github"></i> GitHub/damiry947
                     </a>
                     <a href="mailto:askerhanovdamir1@gmail.com">
-                        <i class="fas fa-envelope"></i> Email
+                        <i class="fas fa-envelope"></i> askerhanovdamir1@gmail.com
                     </a>
                 </div>
                 <p class="copyright">
-                    © <span class="year-highlight">2026</span> Damir. Проекты защищены различными лицензиями.
+                    © <span class="year-highlight">2026</span> <span class="username-footer">damiry947</span>. Все права защищены.
                 </p>
                 <p class="copyright">
-                    Для использования проприетарных проектов требуется письменное разрешение.
+                    Проекты защищены различными лицензиями. Для использования проприетарных проектов требуется письменное разрешение.
                 </p>
             </div>
         </div>
@@ -494,12 +543,28 @@
             
             <div style="background-color: #0d1117; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #30363d;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <i class="fas fa-user" style="color: #58a6ff;"></i>
+                    <strong style="color: #c9d1d9;">Автор:</strong>
+                    <span style="color: #58a6ff;">damiry947</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                     <i class="fas fa-envelope" style="color: #58a6ff;"></i>
                     <strong style="color: #c9d1d9;">Email для запросов:</strong>
                 </div>
-                <a href="mailto:askerhanovdamir1@gmail.com?subject=Запрос доступа к проекту" style="color: #58a6ff; word-break: break-all;">
+                <a href="mailto:askerhanovdamir1@gmail.com?subject=Запрос доступа к проекту" style="color: #58a6ff; word-break: break-all; display: block; margin-bottom: 10px;">
                     askerhanovdamir1@gmail.com
                 </a>
+                <small style="color: #8b949e; display: block;">В теме письма укажите: "Запрос доступа к проекту [Название проекта]"</small>
+            </div>
+            
+            <div style="background-color: rgba(218, 54, 51, 0.1); padding: 12px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #da3633;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                    <i class="fas fa-exclamation-triangle" style="color: #f85149;"></i>
+                    <strong style="color: #f85149;">Важно:</strong>
+                </div>
+                <p style="color: #f85149; font-size: 0.9rem; margin: 0;">
+                    Этот проект защищен проприетарной лицензией. Любое использование без письменного разрешения запрещено.
+                </p>
             </div>
             
             <button id="closeModal" style="background-color: #238636; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: 500;">
@@ -548,7 +613,7 @@
                 const modalDescription = document.getElementById('modalProjectDescription');
                 
                 modalTitle.textContent = `Запрос доступа к проекту: ${projectName}`;
-                modalDescription.textContent = `Для получения доступа к проекту "${projectName}" отправьте письмо на указанный адрес с описанием целей использования. Укажите в теме письма "Запрос доступа к проекту ${projectName}".`;
+                modalDescription.textContent = `Для получения доступа к проекту "${projectName}" отправьте письмо на указанный адрес с описанием целей использования.`;
                 
                 modal.style.display = 'flex';
             });
