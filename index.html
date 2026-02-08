@@ -3,638 +3,950 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио проектов GitHub - damiry947</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>🛍️ Магазин поддержки | Бот: @vamogatel_denga_bot</title>
+    <meta name="description" content="Удобный интерфейс для поддержки автора через Telegram бота">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         body {
-            background-color: #0d1117;
-            color: #c9d1d9;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 20px;
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.3);
         }
         
-        /* Header */
-        header {
-            background-color: #161b22;
-            padding: 30px 0;
-            border-bottom: 1px solid #30363d;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo i {
-            font-size: 2.5rem;
-            color: #58a6ff;
-        }
-        
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-        
-        .username {
-            color: #58a6ff;
-            font-weight: bold;
-        }
-        
-        .github-link {
-            color: #58a6ff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 15px;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-        
-        .github-link:hover {
-            background-color: #1f6feb;
-            color: white;
-            border-color: #1f6feb;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 60px 0;
+        /* Хедер */
+        .header {
             text-align: center;
-            border-bottom: 1px solid #30363d;
-        }
-        
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: #f0f6fc;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            color: #8b949e;
-        }
-        
-        .current-year {
-            color: #58a6ff;
-            font-weight: bold;
-        }
-        
-        /* Projects Section */
-        .projects {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
             margin-bottom: 40px;
-            color: #f0f6fc;
-            position: relative;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f2f5;
         }
         
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background-color: #58a6ff;
-            margin: 10px auto;
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .project-card {
-            background-color: #161b22;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid #30363d;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: #58a6ff;
-        }
-        
-        .project-header {
-            padding: 25px 25px 15px;
-            border-bottom: 1px solid #30363d;
-        }
-        
-        .project-header h3 {
-            font-size: 1.4rem;
+        .main-title {
+            font-size: 2.8em;
+            color: #333;
             margin-bottom: 10px;
-            color: #58a6ff;
         }
         
-        .project-status {
-            display: inline-block;
-            padding: 4px 10px;
+        .bot-info {
+            background: #f8f9fa;
+            padding: 15px;
             border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 10px;
+            margin: 20px 0;
+            display: inline-block;
         }
         
-        .status-development {
-            background-color: rgba(56, 139, 253, 0.1);
-            color: #58a6ff;
-            border: 1px solid #58a6ff;
+        .bot-link {
+            color: #0088cc;
+            font-weight: bold;
+            text-decoration: none;
         }
         
-        .status-released {
-            background-color: rgba(46, 160, 67, 0.1);
-            color: #3fb950;
-            border: 1px solid #3fb950;
-        }
-        
-        .project-description {
-            color: #8b949e;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .project-details {
-            padding: 20px 25px;
-        }
-        
-        .project-tech {
+        /* Основные табы */
+        .main-tabs {
             display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
         }
         
-        .tech-tag {
-            background-color: #13233a;
-            color: #58a6ff;
+        .main-tab {
+            flex: 1;
+            min-width: 150px;
+            padding: 18px;
+            background: #f0f2f5;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .main-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Внутренние табы (валюта) */
+        .currency-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 8px;
+            margin: 30px 0;
+        }
+        
+        .currency-tab {
+            flex: 1;
+            text-align: center;
+            padding: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+            background: none;
+            transition: all 0.3s;
+        }
+        
+        .currency-tab.active {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .currency-tab[data-currency="rub"] {
+            color: #28a745;
+        }
+        
+        .currency-tab[data-currency="stars"] {
+            color: #ff9800;
+        }
+        
+        /* Панели */
+        .panel {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .panel.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Каталог товаров */
+        .catalog {
+            margin: 40px 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .product-card {
+            border: 2px solid #e9ecef;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            border-color: #667eea;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff4757;
+            color: white;
             padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid #30363d;
+            font-size: 12px;
+            font-weight: bold;
         }
         
-        .license-info {
+        .product-emoji {
+            font-size: 50px;
             margin-bottom: 20px;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
         }
         
-        .license-proprietary {
-            background-color: rgba(218, 54, 51, 0.1);
-            border-left: 4px solid #da3633;
-            color: #f85149;
+        .product-name {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #333;
         }
         
-        .license-mit {
-            background-color: rgba(56, 139, 253, 0.1);
-            border-left: 4px solid #388bfd;
-            color: #58a6ff;
+        .product-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 20px 0;
         }
         
-        .license-label {
+        .price-rub {
+            color: #28a745;
+        }
+        
+        .price-stars {
+            color: #ff9800;
+        }
+        
+        .buy-buttons {
             display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-            margin-bottom: 5px;
+            gap: 10px;
+            margin-top: 20px;
         }
         
-        .license-details {
-            font-size: 0.8rem;
-            margin-top: 5px;
-            color: #8b949e;
+        .buy-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
         }
         
-        .project-links {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary {
-            background-color: #238636;
+        .buy-rub {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
         }
         
-        .btn-primary:hover {
-            background-color: #2ea043;
+        .buy-stars {
+            background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+            color: white;
         }
         
-        .btn-secondary {
-            background-color: #21262d;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
+        /* Быстрые суммы */
+        .quick-amounts {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
         }
         
-        .btn-secondary:hover {
-            background-color: #30363d;
-            border-color: #8b949e;
+        .amounts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
         
-        /* Footer */
-        footer {
-            background-color: #161b22;
-            padding: 30px 0;
-            border-top: 1px solid #30363d;
+        .amount-btn {
+            padding: 20px 15px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .amount-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .amount-stars {
+            border-color: #ff9800;
+            color: #ff9800;
+        }
+        
+        .amount-stars:hover {
+            background: #ff9800;
+            color: white;
+        }
+        
+        /* Своя сумма */
+        .custom-payment {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 50px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .custom-inputs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .custom-input {
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            width: 200px;
             text-align: center;
         }
         
-        .footer-content {
+        .currency-select {
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            background: white;
+            color: #333;
+        }
+        
+        .custom-pay-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .custom-pay-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+        
+        /* Реквизиты */
+        .payment-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .payment-method {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 20px;
+        }
+        
+        .payment-title {
             display: flex;
-            flex-direction: column;
             align-items: center;
             gap: 15px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
         }
         
-        .footer-links {
-            display: flex;
-            gap: 20px;
+        .card-details {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1.2em;
+            margin: 20px 0;
+            border: 2px dashed #28a745;
         }
         
-        .footer-links a {
-            color: #8b949e;
+        /* Инструкции */
+        .instructions {
+            background: #fff8e1;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 5px solid #ff9800;
+        }
+        
+        .instruction-steps {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        
+        .instruction-steps li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Футер */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            padding-top: 30px;
+            border-top: 2px solid #f0f2f5;
+        }
+        
+        .telegram-widget {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: #0088cc;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
             text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: #58a6ff;
-        }
-        
-        .copyright {
-            color: #8b949e;
-            font-size: 0.9rem;
-        }
-        
-        .year-highlight {
-            color: #58a6ff;
+            font-size: 1.2em;
             font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s;
         }
         
-        .username-footer {
-            color: #58a6ff;
-            font-weight: bold;
+        .telegram-widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 136, 204, 0.4);
         }
         
-        /* Responsive */
+        /* Адаптивность */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
+            .container {
+                padding: 25px;
             }
             
-            .projects-grid {
+            .main-title {
+                font-size: 2.2em;
+            }
+            
+            .products-grid {
                 grid-template-columns: 1fr;
             }
             
-            .hero h2 {
-                font-size: 2rem;
+            .amounts-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .project-links {
+            .buy-buttons {
                 flex-direction: column;
-                gap: 10px;
             }
             
-            .btn {
-                justify-content: center;
+            .custom-inputs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .custom-input, .currency-select {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fab fa-github"></i>
-                    <div>
-                        <h1>Портфолио проектов</h1>
-                        <div class="username">damiry947</div>
-                    </div>
-                </div>
-                <a href="https://github.com/damiry947" class="github-link" target="_blank">
-                    <i class="fab fa-github"></i>
-                    Мой GitHub
+    <div class="container">
+        <!-- Хедер -->
+        <div class="header">
+            <h1 class="main-title">🛍️ Магазин поддержки</h1>
+            <p>Удобный интерфейс для поддержки автора через Telegram бота</p>
+            
+            <div class="bot-info">
+                📱 Основной бот: 
+                <a href="https://t.me/vamogatel_denga_bot" class="bot-link" target="_blank">
+                    @vamogatel_denga_bot
                 </a>
+                <br>
+                <small>В боте больше функций: история платежей, уведомления, статистика</small>
             </div>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h2>Привет, я <span class="username">damiry947</span></h2>
-            <p>Здесь представлены мои Java-проекты с GitHub. Специализируюсь на создании desktop-приложений с графическим интерфейсом и интересных тематических проектах.</p>
-            <p>Текущий год: <span class="current-year">2026</span></p>
-            <a href="#projects" class="btn btn-primary">
-                <i class="fas fa-arrow-down"></i>
-                Смотреть проекты
-            </a>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <h2 class="section-title">Мои проекты</h2>
-            <div class="projects-grid">
-                <!-- Project 1 - Java Application -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Java Application</h3>
-                        <div class="project-status status-development">В разработке</div>
-                        <p class="project-description">
-                            Полноценное Java-приложение с графическим интерфейсом пользователя. 
-                            Проект в активной разработке, демонстрирует принципы объектно-ориентированного программирования и работу с библиотеками Java.
-                        </p>
-                    </div>
-                    <div class="project-details">
-                        <div class="project-tech">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">GUI</span>
-                            <span class="tech-tag">ООП</span>
-                            <span class="tech-tag">Desktop App</span>
-                            <span class="tech-tag">В разработке</span>
-                        </div>
-                        
-                        <div class="license-info license-proprietary">
-                            <div class="license-label">
-                                <i class="fas fa-lock"></i>
-                                <span>Проприетарная лицензия</span>
-                            </div>
-                            <div>Copyright © <span class="year-highlight">2026</span> <span class="username">damiry947</span>. Все права защищены.</div>
-                            <div class="license-details">
-                                Распространение и использование строго запрещены без письменного разрешения.
-                            </div>
-                        </div>
-                        
-                        <div class="project-links">
-                            <a href="https://github.com/damiry947/Java-application" class="btn btn-primary" target="_blank">
-                                <i class="fab fa-github"></i>
-                                Код на GitHub
-                            </a>
-                            <button class="btn btn-secondary contact-btn" data-project="Java Application">
-                                <i class="fas fa-envelope"></i>
-                                Запросить доступ
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 - Java An App About Space -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Java An App About Space</h3>
-                        <div class="project-status status-released">Выпущено</div>
-                        <p class="project-description">
-                            Тематическое приложение о космосе, написанное на Java. 
-                            Проект включает интерактивные элементы, связанные с астрономией и исследованием космического пространства.
-                        </p>
-                    </div>
-                    <div class="project-details">
-                        <div class="project-tech">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">Космос</span>
-                            <span class="tech-tag">Интерактив</span>
-                            <span class="tech-tag">Научный</span>
-                            <span class="tech-tag">GUI</span>
-                        </div>
-                        
-                        <div class="license-info license-proprietary">
-                            <div class="license-label">
-                                <i class="fas fa-lock"></i>
-                                <span>Проприетарная лицензия</span>
-                            </div>
-                            <div>Copyright © <span class="year-highlight">2026</span> <span class="username">damiry947</span>. Все права защищены.</div>
-                            <div class="license-details">
-                                Распространение и использование строго запрещены без письменного разрешения.
-                            </div>
-                        </div>
-                        
-                        <div class="project-links">
-                            <a href="https://github.com/damiry947/Java-An-app-about-space" class="btn btn-primary" target="_blank">
-                                <i class="fab fa-github"></i>
-                                Код на GitHub
-                            </a>
-                            <button class="btn btn-secondary contact-btn" data-project="Java An App About Space">
-                                <i class="fas fa-envelope"></i>
-                                Запросить доступ
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 - Lokal Hub -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Lokal Hub</h3>
-                        <div class="project-status status-released">Выпущено</div>
-                        <p class="project-description">
-                            Локальный хаб для управления проектами или ресурсами. 
-                            Приложение предназначено для организации работы в локальной сети или на одном компьютере.
-                            Открытая лицензия MIT позволяет свободное использование.
-                        </p>
-                    </div>
-                    <div class="project-details">
-                        <div class="project-tech">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">Локальная сеть</span>
-                            <span class="tech-tag">Управление</span>
-                            <span class="tech-tag">Хаб</span>
-                            <span class="tech-tag">MIT License</span>
-                        </div>
-                        
-                        <div class="license-info license-mit">
-                            <div class="license-label">
-                                <i class="fas fa-unlock"></i>
-                                <span>Лицензия MIT</span>
-                            </div>
-                            <div>Открытая лицензия. Свободное использование, изменение и распространение с указанием авторства.</div>
-                            <div class="license-details">
-                                Разрешено: копирование, модификация, распространение, коммерческое использование.
-                            </div>
-                        </div>
-                        
-                        <div class="project-links">
-                            <a href="https://github.com/damiry947/lokal-hub" class="btn btn-primary" target="_blank">
-                                <i class="fab fa-github"></i>
-                                Код на GitHub
-                            </a>
-                            <a href="https://github.com/damiry947/lokal-hub/archive/refs/heads/main.zip" class="btn btn-secondary">
-                                <i class="fas fa-download"></i>
-                                Скачать
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <a href="https://github.com/damiry947" target="_blank">
-                        <i class="fab fa-github"></i> GitHub/damiry947
-                    </a>
-                    <a href="mailto:askerhanovdamir1@gmail.com">
-                        <i class="fas fa-envelope"></i> askerhanovdamir1@gmail.com
-                    </a>
-                </div>
-                <p class="copyright">
-                    © <span class="year-highlight">2026</span> <span class="username-footer">damiry947</span>. Все права защищены.
-                </p>
-                <p class="copyright">
-                    Проекты защищены различными лицензиями. Для использования проприетарных проектов требуется письменное разрешение.
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Contact Modal -->
-    <div id="contactModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
-        <div style="background-color: #161b22; padding: 30px; border-radius: 10px; max-width: 500px; width: 90%; border: 1px solid #30363d;">
-            <h3 style="margin-bottom: 15px; color: #58a6ff;" id="modalProjectTitle">Запрос доступа к проекту</h3>
-            <p style="margin-bottom: 20px; color: #8b949e;" id="modalProjectDescription">Для получения доступа к проекту отправьте письмо с описанием целей использования.</p>
-            
-            <div style="background-color: #0d1117; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #30363d;">
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                    <i class="fas fa-user" style="color: #58a6ff;"></i>
-                    <strong style="color: #c9d1d9;">Автор:</strong>
-                    <span style="color: #58a6ff;">damiry947</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                    <i class="fas fa-envelope" style="color: #58a6ff;"></i>
-                    <strong style="color: #c9d1d9;">Email для запросов:</strong>
-                </div>
-                <a href="mailto:askerhanovdamir1@gmail.com?subject=Запрос доступа к проекту" style="color: #58a6ff; word-break: break-all; display: block; margin-bottom: 10px;">
-                    askerhanovdamir1@gmail.com
-                </a>
-                <small style="color: #8b949e; display: block;">В теме письма укажите: "Запрос доступа к проекту [Название проекта]"</small>
-            </div>
-            
-            <div style="background-color: rgba(218, 54, 51, 0.1); padding: 12px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #da3633;">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
-                    <i class="fas fa-exclamation-triangle" style="color: #f85149;"></i>
-                    <strong style="color: #f85149;">Важно:</strong>
-                </div>
-                <p style="color: #f85149; font-size: 0.9rem; margin: 0;">
-                    Этот проект защищен проприетарной лицензией. Любое использование без письменного разрешения запрещено.
-                </p>
-            </div>
-            
-            <button id="closeModal" style="background-color: #238636; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: 500;">
-                Закрыть
+        
+        <!-- Основные табы -->
+        <div class="main-tabs">
+            <button class="main-tab active" data-tab="catalog">
+                📋 Каталог товаров
+            </button>
+            <button class="main-tab" data-tab="quick">
+                ⚡ Быстрая оплата
+            </button>
+            <button class="main-tab" data-tab="custom">
+                💎 Своя сумма
+            </button>
+            <button class="main-tab" data-tab="info">
+                ❓ Как оплатить
             </button>
         </div>
-    </div>
-
-    <script>
-        // Плавная прокрутка к секции проектов
-        document.querySelector('.btn-primary[href="#projects"]').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('#projects').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
         
-        // Добавление анимации при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.project-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 200 * index);
-            });
+        <!-- Панель каталога -->
+        <div class="panel active" id="catalog-panel">
+            <h2>🎁 Выберите товар для поддержки</h2>
+            <p style="color: #666; margin: 15px 0 30px;">Каждый товар можно оплатить рублями или звёздами</p>
             
-            // Установка текущего года
-            const currentYear = new Date().getFullYear();
-            document.querySelector('.current-year').textContent = currentYear;
-            document.querySelectorAll('.year-highlight').forEach(el => {
-                el.textContent = currentYear;
-            });
-        });
+            <div class="currency-tabs">
+                <button class="currency-tab active" data-currency="rub">💰 Показать в рублях</button>
+                <button class="currency-tab" data-currency="stars">⭐ Показать в звёздах</button>
+            </div>
+            
+            <div class="catalog">
+                <div class="products-grid" id="productsContainer">
+                    <!-- Товары загружаются через JS -->
+                </div>
+            </div>
+        </div>
         
-        // Обработка кнопок запроса доступа
-        document.querySelectorAll('.contact-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const projectName = this.getAttribute('data-project');
-                const modal = document.getElementById('contactModal');
-                const modalTitle = document.getElementById('modalProjectTitle');
-                const modalDescription = document.getElementById('modalProjectDescription');
+        <!-- Панель быстрой оплаты -->
+        <div class="panel" id="quick-panel">
+            <h2>⚡ Быстрая оплата</h2>
+            <p style="color: #666; margin: 15px 0 30px;">Выберите готовую сумму для быстрой оплаты</p>
+            
+            <div class="quick-amounts">
+                <h3>💰 Рубли</h3>
+                <div class="amounts-grid">
+                    <button class="amount-btn" data-amount="100" data-currency="rub">100 ₽</button>
+                    <button class="amount-btn" data-amount="300" data-currency="rub">300 ₽</button>
+                    <button class="amount-btn" data-amount="500" data-currency="rub">500 ₽</button>
+                    <button class="amount-btn" data-amount="1000" data-currency="rub">1000 ₽</button>
+                    <button class="amount-btn" data-amount="2000" data-currency="rub">2000 ₽</button>
+                    <button class="amount-btn" data-amount="5000" data-currency="rub">5000 ₽</button>
+                </div>
                 
-                modalTitle.textContent = `Запрос доступа к проекту: ${projectName}`;
-                modalDescription.textContent = `Для получения доступа к проекту "${projectName}" отправьте письмо на указанный адрес с описанием целей использования.`;
+                <h3 style="margin-top: 40px;">⭐ Звёзды</h3>
+                <div class="amounts-grid">
+                    <button class="amount-btn amount-stars" data-amount="10" data-currency="stars">⭐ 10</button>
+                    <button class="amount-btn amount-stars" data-amount="20" data-currency="stars">⭐ 20</button>
+                    <button class="amount-btn amount-stars" data-amount="50" data-currency="stars">⭐ 50</button>
+                    <button class="amount-btn amount-stars" data-amount="100" data-currency="stars">⭐ 100</button>
+                    <button class="amount-btn amount-stars" data-amount="200" data-currency="stars">⭐ 200</button>
+                    <button class="amount-btn amount-stars" data-amount="500" data-currency="stars">⭐ 500</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Панель своей суммы -->
+        <div class="panel" id="custom-panel">
+            <div class="custom-payment">
+                <h2 style="color: white;">💎 Своя сумма</h2>
+                <p style="color: rgba(255,255,255,0.9); margin: 15px 0 30px;">Введите любую сумму для поддержки</p>
                 
-                modal.style.display = 'flex';
-            });
-        });
+                <div class="custom-inputs">
+                    <input type="number" id="customAmount" class="custom-input" placeholder="Сумма" min="1" step="1">
+                    
+                    <select id="customCurrency" class="currency-select">
+                        <option value="rub">Рубли (₽)</option>
+                        <option value="stars">Звёзды (⭐)</option>
+                    </select>
+                    
+                    <button class="custom-pay-btn" onclick="processCustomPayment()">
+                        💳 Оплатить
+                    </button>
+                </div>
+                
+                <p style="margin-top: 25px; font-size: 0.9em; opacity: 0.9;">
+                    1 звезда ≈ 7 рублей
+                </p>
+            </div>
+        </div>
         
-        // Закрытие модального окна
-        document.getElementById('closeModal').addEventListener('click', function() {
-            document.getElementById('contactModal').style.display = 'none';
-        });
+        <!-- Панель информации -->
+        <div class="panel" id="info-panel">
+            <div class="payment-info">
+                <div class="payment-method">
+                    <div class="payment-title">
+                        <span>💳</span>
+                        <h3>Оплата рублями</h3>
+                    </div>
+                    <p>Перевод на банковскую карту:</p>
+                    <div class="card-details">
+                        2200 **** **** 1234<br>
+                        Иван Иванов
+                    </div>
+                    <p><strong>После перевода:</strong></p>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>Сохраните чек или скриншот</li>
+                        <li>Напишите в Telegram боту</li>
+                        <li>Получите подтверждение</li>
+                    </ol>
+                </div>
+                
+                <div class="payment-method">
+                    <div class="payment-title">
+                        <span>⭐</span>
+                        <h3>Оплата звёздами</h3>
+                    </div>
+                    <p><strong>Telegram Stars</strong> — официальная система монетизации</p>
+                    <div class="instructions">
+                        <h4>📱 Как отправить звёзды:</h4>
+                        <ol class="instruction-steps">
+                            <li>Откройте бота на телефоне</li>
+                            <li>Нажмите на значок ₿ в поле ввода</li>
+                            <li>Выберите количество звёзд</li>
+                            <li>Нажмите "Отправить"</li>
+                            <li>Получите автоматическое спасибо!</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        // Закрытие модального окна при клике вне его
-        document.getElementById('contactModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.style.display = 'none';
+        <!-- Футер -->
+        <div class="footer">
+            <p>Все платежи добровольные и безопасные ❤️</p>
+            
+            <a href="https://t.me/vamogatel_denga_bot" class="telegram-widget" target="_blank">
+                <span>📱</span>
+                <span>Открыть основного бота в Telegram</span>
+                <span>→</span>
+            </a>
+            
+            <p style="margin-top: 30px;">
+                <small>
+                    Это веб-приложение — дополнение к основному боту.<br>
+                    Все основные функции доступны в боте @vamogatel_denga_bot
+                </small>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Данные товаров
+        const products = [
+            {
+                id: 1,
+                name: "☕ Кофе автору",
+                description: "Чашка горячего кофе для бодрости",
+                price_rub: 150,
+                price_stars: 20,
+                emoji: "☕",
+                category: "drink",
+                popular: true
+            },
+            {
+                id: 2,
+                name: "🍕 Пицца на ужин",
+                description: "Вкусная пицца после рабочего дня",
+                price_rub: 500,
+                price_stars: 70,
+                emoji: "🍕",
+                category: "food",
+                popular: true
+            },
+            {
+                id: 3,
+                name: "🎮 Игра в Steam",
+                description: "Новая игра для отдыха",
+                price_rub: 1000,
+                price_stars: 140,
+                emoji: "🎮",
+                category: "digital"
+            },
+            {
+                id: 4,
+                name: "📚 Новая книга",
+                description: "Интересная книга для развития",
+                price_rub: 300,
+                price_stars: 40,
+                emoji: "📚",
+                category: "education"
+            },
+            {
+                id: 5,
+                name: "🎵 Месяц музыки",
+                description: "Подписка на музыкальный сервис",
+                price_rub: 250,
+                price_stars: 35,
+                emoji: "🎵",
+                category: "entertainment"
+            },
+            {
+                id: 6,
+                name: "😄 Улыбка автора",
+                description: "Гарантированная улыбка в ответ",
+                price_rub: 50,
+                price_stars: 7,
+                emoji: "😄",
+                category: "fun",
+                popular: true
+            },
+            {
+                id: 7,
+                name: "🌟 Звёзда удачи",
+                description: "Виртуальная звезда на удачу",
+                price_rub: 100,
+                price_stars: 15,
+                emoji: "🌟",
+                category: "fun"
+            },
+            {
+                id: 8,
+                name: "🎉 Виртуальный праздник",
+                description: "Поздравление с вашим праздником",
+                price_rub: 200,
+                price_stars: 30,
+                emoji: "🎉",
+                category: "fun"
+            },
+            {
+                id: 9,
+                name: "🏆 Топ донатер",
+                description: "Специальный статус в боте",
+                price_rub: 1000,
+                price_stars: 140,
+                emoji: "🏆",
+                category: "status"
+            },
+            {
+                id: 10,
+                name: "👑 Король поддержки",
+                description: "Высший статус поддержки",
+                price_rub: 2000,
+                price_stars: 280,
+                emoji: "👑",
+                category: "status"
+            }
+        ];
+        
+        let currentCurrency = 'rub';
+        let currentTab = 'catalog';
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            setupEventListeners();
+            
+            // Для Telegram Web App
+            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+                Telegram.WebApp.ready();
+                Telegram.WebApp.expand();
+                
+                // Кнопка "Открыть в боте"
+                Telegram.WebApp.MainButton.setText("Открыть в боте").show();
+                Telegram.WebApp.MainButton.onClick(() => {
+                    Telegram.WebApp.openTelegramLink('https://t.me/vamogatel_denga_bot');
+                });
             }
         });
         
-        // Открытие почтового клиента при клике на email в модальном окне
-        document.querySelector('a[href^="mailto"]').addEventListener('click', function() {
-            document.getElementById('contactModal').style.display = 'none';
-        });
+        function setupEventListeners() {
+            // Основные табы
+            document.querySelectorAll('.main-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+                    document.getElementById(this.dataset.tab + '-panel').classList.add('active');
+                    
+                    currentTab = this.dataset.tab;
+                });
+            });
+            
+            // Валютные табы
+            document.querySelectorAll('.currency-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.currency-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentCurrency = this.dataset.currency;
+                    renderProducts();
+                });
+            });
+            
+            // Кнопки быстрой оплаты
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const amount = this.dataset.amount;
+                    const currency = this.dataset.currency;
+                    processPayment(amount, currency, 'Быстрая оплата');
+                });
+            });
+        }
+        
+        // Рендер товаров
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const price = currentCurrency === 'rub' ? product.price_rub : product.price_stars;
+                const currencySymbol = currentCurrency === 'rub' ? '₽' : '⭐';
+                const otherPrice = currentCurrency === 'rub' ? 
+                    `⭐ ${product.price_stars} звёзд` : 
+                    `${product.price_rub} ₽`;
+                
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    ${product.popular ? '<div class="product-badge">🔥 Популярный</div>' : ''}
+                    <div class="product-emoji">${product.emoji}</div>
+                    <h3 class="product-name">${product.name}</h3>
+                    <p style="color: #666; margin-bottom: 15px;">${product.description}</p>
+                    
+                    <div class="product-price ${currentCurrency === 'rub' ? 'price-rub' : 'price-stars'}">
+                        ${price} ${currencySymbol}
+                    </div>
+                    
+                    <p style="color: #999; font-size: 0.9em;">
+                        или ${otherPrice}
+                    </p>
+                    
+                    <div class="buy-buttons">
+                        <button class="buy-btn buy-rub" onclick="buyProduct(${product.id}, 'rub')">
+                            💰 ${product.price_rub} ₽
+                        </button>
+                        <button class="buy-btn buy-stars" onclick="buyProduct(${product.id}, 'stars')">
+                            ⭐ ${product.price_stars} звёзд
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(productCard);
+            });
+        }
+        
+        // Покупка товара
+        function buyProduct(productId, currency) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const amount = currency === 'rub' ? product.price_rub : product.price_stars;
+            processPayment(amount, currency, product.name);
+        }
+        
+        // Обработка платежа
+        function processPayment(amount, currency, description) {
+            const rubAmount = currency === 'rub' ? amount : amount * 7;
+            const starsAmount = currency === 'stars' ? amount : Math.round(rubAmount / 7);
+            
+            const message = `🎉 <b>${description}</b>\n\n` +
+                          `Сумма: ${amount} ${currency === 'rub' ? '₽' : '⭐'}\n` +
+                          `В другой валюте: ${currency === 'rub' ? `⭐ ${starsAmount} звёзд` : `${rubAmount} ₽`}\n\n` +
+                          `${currency === 'rub' ? 
+                            '💳 Для оплаты переведите на карту:\n' +
+                            '<code>2200 **** **** 1234</code>\n\n' +
+                            'В комментарии укажите ваш username' :
+                            '⭐ Для оплаты отправьте звёзды боту @vamogatel_denga_bot\n' +
+                            'Как отправить:\n' +
+                            '1. Откройте бота на телефоне\n' +
+                            '2. Нажмите на значок ₿\n' +
+                            '3. Выберите количество\n' +
+                            '4. Отправьте'}`;
+            
+            // Показываем уведомление
+            showNotification(message);
+            
+            // Для Telegram Web App отправляем данные в бота
+            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+                Telegram.WebApp.sendData(JSON.stringify({
+                    action: 'payment_request',
+                    amount: amount,
+                    currency: currency,
+                    description: description,
+                    rub_amount: rubAmount,
+                    stars_amount: starsAmount
+                }));
+            }
+        }
+        
+        // Своя сумма
+        function processCustomPayment() {
+            const amountInput = document.getElementById('customAmount');
+            const currencySelect = document.getElementById('customCurrency');
+            
+            const amount = parseFloat(amountInput.value);
+            const currency = currencySelect.value;
+            
+            if (!amount || amount <= 0) {
+                showNotification('⚠️ Введите корректную сумму!');
+                return;
+            }
+            
+            processPayment(amount, currency, 'Своя сумма');
+            amountInput.value = '';
+        }
+        
+        // Показ уведомления
+        function showNotification(message) {
+            // Создаем overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: rgba(0,0,0,0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                animation: fadeIn 0.3s;
+            `;
+            
+            // Создаем модальное окно
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                background: white;
+                padding: 40px;
+                border-radius: 20px;
+                max-width: 500px;
+                width: 90%;
+                text-align: center;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+                animation: slideUp 0.3s;
+            `;
+            
+            modal.innerHTML = `
+                <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
+                <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 20px;">
+                    Запрос на оплату отправлен!
+                </div>
+                <div style="text-align: left; margin-bottom: 30px; font-size: 1.1em; line-height: 1.5;">
+                    ${message}
+                </div>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <button onclick="this.closest('div').parentElement.remove()" style="
+                        background: #667eea; color: white; border: none; padding: 15px 30px;
+                        border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer;
+                    ">
+                        Понятно
+                    </button>
+                    <button onclick="openBot()" style="
+                        background: #28a745; color: white; border: none; padding: 15px 30px;
+                        border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer;
+                    ">
+                        📱 Открыть бота
+                    </button>
+                </div>
+            `;
+            
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+            
+            // Закрытие по клику на overlay
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    overlay.remove();
+                }
+            });
+        }
+        
+        function openBot() {
+            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+                Telegram.WebApp.openTelegramLink('https://t.me/vamogatel_denga_bot');
+            } else {
+                window.open('https://t.me/vamogatel_denga_bot', '_blank');
+            }
+        }
+        
+        // Добавляем CSS анимации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes slideUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
