@@ -580,4 +580,385 @@
         </div>
         
         <!-- Панель своей суммы -->
-        <div class="panel" id="custom
+        <div class="panel" id="custom-panel">
+            <div class="custom-payment">
+                <h2 class="custom-title">💎 Своя сумма</h2>
+                <p>Введите любую сумму для поддержки (от 1 рубля)</p>
+                
+                <div class="custom-inputs">
+                    <input type="number" id="customAmount" class="custom-amount-input" 
+                           placeholder="Сумма в рублях" min="1" step="1" value="100">
+                    
+                    <button class="custom-pay-button" onclick="processCustomPayment()">
+                        💳 Оплатить
+                    </button>
+                </div>
+                
+                <p style="margin-top: 25px; font-size: 0.9em; opacity: 0.9;">
+                    Платёжная система: ЮKassa • Безопасные транзакции • PCI DSS
+                </p>
+            </div>
+        </div>
+        
+        <!-- Панель инструкций -->
+        <div class="panel" id="instructions-panel">
+            <div class="instructions">
+                <h2 class="section-title">📖 Как произвести оплату</h2>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Откройте бота</h3>
+                        <p>Нажмите кнопку ниже, чтобы открыть бота в Telegram</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Выберите сумму</h3>
+                        <p>Используйте команду /pay или кнопки в меню бота</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Оплатите</h3>
+                        <p>Перейдите по ссылке и оплатите через ЮKassa</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Подтверждение</h3>
+                        <p>Получите автоматическое подтверждение в боте</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Футер -->
+        <div class="footer">
+            <a href="https://t.me/vamogatel_denga_bot" class="telegram-link" target="_blank">
+                <span>🤖</span>
+                <span>Открыть бота в Telegram</span>
+                <span>→</span>
+            </a>
+            
+            <p style="margin-top: 30px;">
+                <small>
+                    💳 Платежи обрабатываются через ЮKassa • 🔐 Безопасные транзакции<br>
+                    📧 По вопросам: askerhanovdamir1@gmail.com • 👤 Telegram: @damiry947
+                </small>
+            </p>
+            
+            <p style="margin-top: 20px; font-size: 0.9em; color: #999;">
+                Это веб-приложение является интерфейсом для бота @vamogatel_denga_bot<br>
+                Все платежи проходят через официального бота в Telegram
+            </p>
+        </div>
+    </div>
+    
+    <!-- Модальное окно -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-emoji" id="modalEmoji">💰</div>
+            <h2 class="modal-title" id="modalTitle">Готово к оплате!</h2>
+            <div class="modal-text" id="modalText">
+                <!-- Текст загружается через JS -->
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="openTelegram()">
+                    📱 Открыть бота
+                </button>
+                <button class="modal-button secondary" onclick="closeModal()">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Данные товаров
+        const products = [
+            {
+                id: 1,
+                name: "☕ Кофе автору",
+                description: "Чашка ароматного кофе для бодрости и вдохновения",
+                price: 150,
+                emoji: "☕",
+                popular: true
+            },
+            {
+                id: 2,
+                name: "🍕 Пицца на ужин",
+                description: "Вкусная пицца после долгого рабочего дня",
+                price: 500,
+                emoji: "🍕",
+                popular: true
+            },
+            {
+                id: 3,
+                name: "🎮 Игра в Steam",
+                description: "Новая игра для отдыха и развлечений",
+                price: 1000,
+                emoji: "🎮"
+            },
+            {
+                id: 4,
+                name: "📚 Новая книга",
+                description: "Интересная книга для саморазвития",
+                price: 300,
+                emoji: "📚"
+            },
+            {
+                id: 5,
+                name: "🎵 Месяц музыки",
+                description: "Подписка на музыкальный сервис",
+                price: 250,
+                emoji: "🎵"
+            },
+            {
+                id: 6,
+                name: "😄 Улыбка автора",
+                description: "Гарантированная улыбка и хорошее настроение",
+                price: 50,
+                emoji: "😄",
+                popular: true
+            },
+            {
+                id: 7,
+                name: "🌟 Звёзда удачи",
+                description: "Виртуальная звезда на удачу в делах",
+                price: 100,
+                emoji: "🌟"
+            },
+            {
+                id: 8,
+                name: "🎉 Виртуальный праздник",
+                description: "Поздравление с вашим личным праздником",
+                price: 200,
+                emoji: "🎉"
+            },
+            {
+                id: 9,
+                name: "🏆 Топ донатер",
+                description: "Специальный статус в боте и статистике",
+                price: 1000,
+                emoji: "🏆"
+            },
+            {
+                id: 10,
+                name: "👑 Король поддержки",
+                description: "Высший статус и благодарность в профиле",
+                price: 2000,
+                emoji: "👑"
+            },
+            {
+                id: 11,
+                name: "🚀 Буст проекта",
+                description: "Ускоренная разработка новых функций",
+                price: 5000,
+                emoji: "🚀"
+            },
+            {
+                id: 12,
+                name: "💻 Новый ноутбук",
+                description: "Вклад в новое оборудование для разработки",
+                price: 50000,
+                emoji: "💻"
+            }
+        ];
+        
+        let currentPanel = 'catalog';
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            setupEventListeners();
+            
+            // Для Telegram Web App
+            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+                Telegram.WebApp.ready();
+                Telegram.WebApp.expand();
+                
+                // Настраиваем кнопку
+                Telegram.WebApp.MainButton.setText("Открыть в боте").show();
+                Telegram.WebApp.MainButton.onClick(() => {
+                    openTelegram();
+                });
+            }
+        });
+        
+        // Настройка обработчиков событий
+        function setupEventListeners() {
+            // Кнопки быстрой оплаты
+            document.querySelectorAll('.amount-button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const amount = this.getAttribute('data-amount');
+                    showPaymentModal(amount, 'Быстрая оплата');
+                });
+            });
+        }
+        
+        // Рендер товаров
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    ${product.popular ? '<div class="product-badge">🔥 Популярный</div>' : ''}
+                    <div class="product-emoji">${product.emoji}</div>
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    
+                    <div class="product-price">
+                        ${product.price} ₽
+                    </div>
+                    
+                    <button class="buy-button" onclick="buyProduct(${product.id})">
+                        💳 Купить за ${product.price} ₽
+                    </button>
+                `;
+                
+                container.appendChild(productCard);
+            });
+        }
+        
+        // Покупка товара
+        function buyProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            showPaymentModal(product.price, product.name);
+        }
+        
+        // Своя сумма
+        function processCustomPayment() {
+            const amountInput = document.getElementById('customAmount');
+            const amount = parseFloat(amountInput.value);
+            
+            if (!amount || amount < 1) {
+                showErrorModal('Введите корректную сумму (от 1 рубля)');
+                return;
+            }
+            
+            showPaymentModal(amount, 'Своя сумма');
+            amountInput.value = '';
+        }
+        
+        // Показать модальное окно оплаты
+        function showPaymentModal(amount, description) {
+            const modal = document.getElementById('paymentModal');
+            const modalEmoji = document.getElementById('modalEmoji');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalText = document.getElementById('modalText');
+            
+            // Выбираем эмодзи в зависимости от суммы
+            let emoji = '💰';
+            if (amount >= 5000) emoji = '🚀';
+            else if (amount >= 1000) emoji = '🏆';
+            else if (amount >= 500) emoji = '🎁';
+            else if (amount >= 100) emoji = '💸';
+            else emoji = '💎';
+            
+            modalEmoji.textContent = emoji;
+            modalTitle.textContent = 'Готово к оплате!';
+            
+            const message = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 2em; font-weight: bold; color: #28a745; margin: 10px 0;">
+                        ${amount} ₽
+                    </div>
+                    <div style="color: #666; margin-bottom: 15px;">
+                        ${description}
+                    </div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <strong>📱 Инструкция:</strong>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>Нажмите кнопку "Открыть бота" ниже</li>
+                        <li>В боте используйте команду: <code>/pay ${amount}</code></li>
+                        <li>Или выберите сумму в меню бота</li>
+                        <li>Оплатите через ЮKassa</li>
+                        <li>Получите подтверждение</li>
+                    </ol>
+                </div>
+                
+                <div style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                    💳 <strong>ЮKassa</strong> • 🔐 <strong>Безопасно</strong> • ⚡ <strong>Мгновенно</strong>
+                </div>
+            `;
+            
+            modalText.innerHTML = message;
+            modal.style.display = 'flex';
+        }
+        
+        // Показать окно ошибки
+        function showErrorModal(message) {
+            const modal = document.getElementById('paymentModal');
+            const modalEmoji = document.getElementById('modalEmoji');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalText = document.getElementById('modalText');
+            
+            modalEmoji.textContent = '⚠️';
+            modalTitle.textContent = 'Ошибка';
+            modalText.innerHTML = `
+                <div style="text-align: center;">
+                    <p style="color: #ff4757; margin: 20px 0;">${message}</p>
+                    <p>Пожалуйста, попробуйте ещё раз.</p>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+        
+        // Закрыть модальное окно
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+        
+        // Открыть Telegram
+        function openTelegram() {
+            const url = 'https://t.me/vamogatel_denga_bot';
+            
+            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+                Telegram.WebApp.openTelegramLink(url);
+            } else {
+                window.open(url, '_blank');
+            }
+            
+            closeModal();
+        }
+        
+        // Переключение панелей
+        function showPanel(panelId) {
+            // Скрываем все панели
+            document.querySelectorAll('.panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Убираем активный класс у всех табов
+            document.querySelectorAll('.main-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Показываем нужную панель
+            document.getElementById(panelId + '-panel').classList.add('active');
+            
+            // Активируем нужную кнопку
+            event.target.classList.add('active');
+            
+            currentPanel = panelId;
+        }
+        
+        // Закрытие модального окна по клику вне его
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
