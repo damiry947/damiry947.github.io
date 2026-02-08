@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛍️ Магазин поддержки | Бот: @vamogatel_denga_bot</title>
-    <meta name="description" content="Удобный интерфейс для поддержки автора через Telegram бота">
+    <meta name="description" content="Удобный интерфейс для поддержки автора через Telegram бота и ЮKassa">
     
     <style>
         * {
@@ -18,10 +18,11 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #333;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             background: white;
             border-radius: 25px;
@@ -33,7 +34,7 @@
         .header {
             text-align: center;
             margin-bottom: 40px;
-            padding-bottom: 20px;
+            padding-bottom: 25px;
             border-bottom: 2px solid #f0f2f5;
         }
         
@@ -41,20 +42,35 @@
             font-size: 2.8em;
             color: #333;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         
-        .bot-info {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 12px;
-            margin: 20px 0;
-            display: inline-block;
+        .title-emoji {
+            font-size: 1.2em;
         }
         
-        .bot-link {
-            color: #0088cc;
-            font-weight: bold;
-            text-decoration: none;
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        /* Блок информации */
+        .info-box {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.4em;
         }
         
         /* Основные табы */
@@ -63,65 +79,38 @@
             gap: 10px;
             margin-bottom: 30px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .main-tab {
             flex: 1;
-            min-width: 150px;
-            padding: 18px;
+            min-width: 200px;
+            max-width: 300px;
+            padding: 20px 15px;
             background: #f0f2f5;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .main-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
         .main-tab.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        /* Внутренние табы (валюта) */
-        .currency-tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 8px;
-            margin: 30px 0;
-        }
-        
-        .currency-tab {
-            flex: 1;
-            text-align: center;
-            padding: 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
-            border: none;
-            background: none;
-            transition: all 0.3s;
-        }
-        
-        .currency-tab.active {
-            background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .currency-tab[data-currency="rub"] {
-            color: #28a745;
-        }
-        
-        .currency-tab[data-currency="stars"] {
-            color: #ff9800;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
         }
         
         /* Панели */
@@ -140,8 +129,15 @@
         }
         
         /* Каталог товаров */
-        .catalog {
+        .catalog-section {
             margin: 40px 0;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #333;
+            text-align: center;
         }
         
         .products-grid {
@@ -173,9 +169,9 @@
             right: 15px;
             background: #ff4757;
             color: white;
-            padding: 5px 12px;
+            padding: 8px 15px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
         }
         
@@ -190,88 +186,79 @@
             color: #333;
         }
         
-        .product-price {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin: 20px 0;
+        .product-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
         
-        .price-rub {
+        .product-price {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 20px 0;
             color: #28a745;
         }
         
-        .price-stars {
-            color: #ff9800;
-        }
-        
-        .buy-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .buy-btn {
-            flex: 1;
-            padding: 15px;
+        .buy-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
+            width: 100%;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
-        .buy-rub {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
+        .buy-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
         
-        .buy-stars {
-            background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
-            color: white;
-        }
-        
-        /* Быстрые суммы */
-        .quick-amounts {
+        /* Быстрая оплата */
+        .quick-payment {
             background: #f8f9fa;
             padding: 30px;
             border-radius: 20px;
             margin: 40px 0;
         }
         
-        .amounts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+        .quick-title {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8em;
         }
         
-        .amount-btn {
-            padding: 20px 15px;
-            border: 2px solid #667eea;
+        .amounts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .amount-button {
+            padding: 25px 15px;
+            border: 3px solid #667eea;
             background: white;
             color: #667eea;
-            border-radius: 12px;
-            font-size: 20px;
+            border-radius: 15px;
+            font-size: 24px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
+            text-align: center;
         }
         
-        .amount-btn:hover {
+        .amount-button:hover {
             background: #667eea;
             color: white;
             transform: scale(1.05);
-        }
-        
-        .amount-stars {
-            border-color: #ff9800;
-            color: #ff9800;
-        }
-        
-        .amount-stars:hover {
-            background: #ff9800;
-            color: white;
         }
         
         /* Своя сумма */
@@ -284,6 +271,11 @@
             color: white;
         }
         
+        .custom-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
         .custom-inputs {
             display: flex;
             gap: 15px;
@@ -292,90 +284,66 @@
             flex-wrap: wrap;
         }
         
-        .custom-input {
-            padding: 18px;
+        .custom-amount-input {
+            padding: 20px;
             border: none;
             border-radius: 12px;
-            font-size: 18px;
-            width: 200px;
+            font-size: 20px;
+            width: 250px;
             text-align: center;
+            background: rgba(255, 255, 255, 0.9);
         }
         
-        .currency-select {
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            background: white;
-            color: #333;
-        }
-        
-        .custom-pay-btn {
+        .custom-pay-button {
             background: white;
             color: #667eea;
             border: none;
-            padding: 18px 40px;
+            padding: 20px 45px;
             border-radius: 12px;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-        }
-        
-        .custom-pay-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
-        }
-        
-        /* Реквизиты */
-        .payment-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .payment-method {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 20px;
-        }
-        
-        .payment-title {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            font-size: 1.5em;
+            justify-content: center;
+            gap: 12px;
         }
         
-        .card-details {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            font-family: monospace;
-            font-size: 1.2em;
-            margin: 20px 0;
-            border: 2px dashed #28a745;
+        .custom-pay-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255,255,255,0.3);
         }
         
         /* Инструкции */
         .instructions {
-            background: #fff8e1;
-            padding: 30px;
-            border-radius: 20px;
             margin: 40px 0;
-            border-left: 5px solid #ff9800;
         }
         
-        .instruction-steps {
-            margin-left: 20px;
-            margin-top: 20px;
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
         }
         
-        .instruction-steps li {
+        .step {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
             margin-bottom: 15px;
-            line-height: 1.6;
         }
         
         /* Футер */
@@ -387,24 +355,97 @@
             border-top: 2px solid #f0f2f5;
         }
         
-        .telegram-widget {
+        .telegram-link {
             display: inline-flex;
             align-items: center;
             gap: 15px;
             background: #0088cc;
             color: white;
-            padding: 20px 30px;
+            padding: 20px 35px;
             border-radius: 15px;
             text-decoration: none;
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: bold;
             margin: 20px 0;
             transition: all 0.3s;
         }
         
-        .telegram-widget:hover {
+        .telegram-link:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 136, 204, 0.4);
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.3s;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-emoji {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .modal-text {
+            text-align: left;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .modal-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .modal-button.primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .modal-button.secondary {
+            background: #f8f9fa;
+            color: #333;
         }
         
         /* Адаптивность */
@@ -415,6 +456,16 @@
             
             .main-title {
                 font-size: 2.2em;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .main-tabs {
+                flex-direction: column;
+            }
+            
+            .main-tab {
+                min-width: 100%;
             }
             
             .products-grid {
@@ -425,18 +476,36 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .buy-buttons {
-                flex-direction: column;
-            }
-            
             .custom-inputs {
                 flex-direction: column;
-                align-items: center;
             }
             
-            .custom-input, .currency-select {
+            .custom-amount-input {
                 width: 100%;
                 max-width: 300px;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .main-title {
+                font-size: 1.8em;
+            }
+            
+            .amounts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .amount-button {
+                padding: 20px;
+                font-size: 20px;
             }
         }
     </style>
@@ -445,46 +514,40 @@
     <div class="container">
         <!-- Хедер -->
         <div class="header">
-            <h1 class="main-title">🛍️ Магазин поддержки</h1>
-            <p>Удобный интерфейс для поддержки автора через Telegram бота</p>
+            <h1 class="main-title">
+                <span class="title-emoji">🛍️</span>
+                Магазин поддержки
+                <span class="title-emoji">💖</span>
+            </h1>
+            <p class="subtitle">Поддержи автора через Telegram бота с ЮKassa</p>
             
-            <div class="bot-info">
-                📱 Основной бот: 
-                <a href="https://t.me/vamogatel_denga_bot" class="bot-link" target="_blank">
-                    @vamogatel_denga_bot
-                </a>
-                <br>
-                <small>В боте больше функций: история платежей, уведомления, статистика</small>
+            <div class="info-box">
+                <h3>🤖 Бот: @vamogatel_denga_bot</h3>
+                <p>Для оплаты откройте бота в Telegram и следуйте инструкциям</p>
             </div>
         </div>
         
         <!-- Основные табы -->
         <div class="main-tabs">
-            <button class="main-tab active" data-tab="catalog">
+            <button class="main-tab active" onclick="showPanel('catalog')">
                 📋 Каталог товаров
             </button>
-            <button class="main-tab" data-tab="quick">
+            <button class="main-tab" onclick="showPanel('quick')">
                 ⚡ Быстрая оплата
             </button>
-            <button class="main-tab" data-tab="custom">
+            <button class="main-tab" onclick="showPanel('custom')">
                 💎 Своя сумма
             </button>
-            <button class="main-tab" data-tab="info">
+            <button class="main-tab" onclick="showPanel('instructions')">
                 ❓ Как оплатить
             </button>
         </div>
         
         <!-- Панель каталога -->
         <div class="panel active" id="catalog-panel">
-            <h2>🎁 Выберите товар для поддержки</h2>
-            <p style="color: #666; margin: 15px 0 30px;">Каждый товар можно оплатить рублями или звёздами</p>
-            
-            <div class="currency-tabs">
-                <button class="currency-tab active" data-currency="rub">💰 Показать в рублях</button>
-                <button class="currency-tab" data-currency="stars">⭐ Показать в звёздах</button>
-            </div>
-            
-            <div class="catalog">
+            <div class="catalog-section">
+                <h2 class="section-title">🎁 Выберите товар для поддержки</h2>
+                
                 <div class="products-grid" id="productsContainer">
                     <!-- Товары загружаются через JS -->
                 </div>
@@ -493,460 +556,28 @@
         
         <!-- Панель быстрой оплаты -->
         <div class="panel" id="quick-panel">
-            <h2>⚡ Быстрая оплата</h2>
-            <p style="color: #666; margin: 15px 0 30px;">Выберите готовую сумму для быстрой оплаты</p>
-            
-            <div class="quick-amounts">
-                <h3>💰 Рубли</h3>
+            <div class="quick-payment">
+                <h2 class="quick-title">⚡ Быстрая оплата</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 25px;">
+                    Выберите стандартную сумму для быстрой оплаты
+                </p>
+                
                 <div class="amounts-grid">
-                    <button class="amount-btn" data-amount="100" data-currency="rub">100 ₽</button>
-                    <button class="amount-btn" data-amount="300" data-currency="rub">300 ₽</button>
-                    <button class="amount-btn" data-amount="500" data-currency="rub">500 ₽</button>
-                    <button class="amount-btn" data-amount="1000" data-currency="rub">1000 ₽</button>
-                    <button class="amount-btn" data-amount="2000" data-currency="rub">2000 ₽</button>
-                    <button class="amount-btn" data-amount="5000" data-currency="rub">5000 ₽</button>
+                    <button class="amount-button" data-amount="50">50 ₽</button>
+                    <button class="amount-button" data-amount="100">100 ₽</button>
+                    <button class="amount-button" data-amount="300">300 ₽</button>
+                    <button class="amount-button" data-amount="500">500 ₽</button>
+                    <button class="amount-button" data-amount="1000">1000 ₽</button>
+                    <button class="amount-button" data-amount="2000">2000 ₽</button>
+                    <button class="amount-button" data-amount="5000">5000 ₽</button>
+                    <button class="amount-button" data-amount="10000">10000 ₽</button>
                 </div>
                 
-                <h3 style="margin-top: 40px;">⭐ Звёзды</h3>
-                <div class="amounts-grid">
-                    <button class="amount-btn amount-stars" data-amount="10" data-currency="stars">⭐ 10</button>
-                    <button class="amount-btn amount-stars" data-amount="20" data-currency="stars">⭐ 20</button>
-                    <button class="amount-btn amount-stars" data-amount="50" data-currency="stars">⭐ 50</button>
-                    <button class="amount-btn amount-stars" data-amount="100" data-currency="stars">⭐ 100</button>
-                    <button class="amount-btn amount-stars" data-amount="200" data-currency="stars">⭐ 200</button>
-                    <button class="amount-btn amount-stars" data-amount="500" data-currency="stars">⭐ 500</button>
+                <div style="text-align: center; margin-top: 20px;">
+                    <p style="color: #666;">После выбора суммы откройте бота в Telegram</p>
                 </div>
             </div>
         </div>
         
         <!-- Панель своей суммы -->
-        <div class="panel" id="custom-panel">
-            <div class="custom-payment">
-                <h2 style="color: white;">💎 Своя сумма</h2>
-                <p style="color: rgba(255,255,255,0.9); margin: 15px 0 30px;">Введите любую сумму для поддержки</p>
-                
-                <div class="custom-inputs">
-                    <input type="number" id="customAmount" class="custom-input" placeholder="Сумма" min="1" step="1">
-                    
-                    <select id="customCurrency" class="currency-select">
-                        <option value="rub">Рубли (₽)</option>
-                        <option value="stars">Звёзды (⭐)</option>
-                    </select>
-                    
-                    <button class="custom-pay-btn" onclick="processCustomPayment()">
-                        💳 Оплатить
-                    </button>
-                </div>
-                
-                <p style="margin-top: 25px; font-size: 0.9em; opacity: 0.9;">
-                    1 звезда ≈ 7 рублей
-                </p>
-            </div>
-        </div>
-        
-        <!-- Панель информации -->
-        <div class="panel" id="info-panel">
-            <div class="payment-info">
-                <div class="payment-method">
-                    <div class="payment-title">
-                        <span>💳</span>
-                        <h3>Оплата рублями</h3>
-                    </div>
-                    <p>Перевод на банковскую карту:</p>
-                    <div class="card-details">
-                        2200 **** **** 1234<br>
-                        Иван Иванов
-                    </div>
-                    <p><strong>После перевода:</strong></p>
-                    <ol style="margin-left: 20px; margin-top: 10px;">
-                        <li>Сохраните чек или скриншот</li>
-                        <li>Напишите в Telegram боту</li>
-                        <li>Получите подтверждение</li>
-                    </ol>
-                </div>
-                
-                <div class="payment-method">
-                    <div class="payment-title">
-                        <span>⭐</span>
-                        <h3>Оплата звёздами</h3>
-                    </div>
-                    <p><strong>Telegram Stars</strong> — официальная система монетизации</p>
-                    <div class="instructions">
-                        <h4>📱 Как отправить звёзды:</h4>
-                        <ol class="instruction-steps">
-                            <li>Откройте бота на телефоне</li>
-                            <li>Нажмите на значок ₿ в поле ввода</li>
-                            <li>Выберите количество звёзд</li>
-                            <li>Нажмите "Отправить"</li>
-                            <li>Получите автоматическое спасибо!</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Футер -->
-        <div class="footer">
-            <p>Все платежи добровольные и безопасные ❤️</p>
-            
-            <a href="https://t.me/vamogatel_denga_bot" class="telegram-widget" target="_blank">
-                <span>📱</span>
-                <span>Открыть основного бота в Telegram</span>
-                <span>→</span>
-            </a>
-            
-            <p style="margin-top: 30px;">
-                <small>
-                    Это веб-приложение — дополнение к основному боту.<br>
-                    Все основные функции доступны в боте @vamogatel_denga_bot
-                </small>
-            </p>
-        </div>
-    </div>
-    
-    <script>
-        // Данные товаров
-        const products = [
-            {
-                id: 1,
-                name: "☕ Кофе автору",
-                description: "Чашка горячего кофе для бодрости",
-                price_rub: 150,
-                price_stars: 20,
-                emoji: "☕",
-                category: "drink",
-                popular: true
-            },
-            {
-                id: 2,
-                name: "🍕 Пицца на ужин",
-                description: "Вкусная пицца после рабочего дня",
-                price_rub: 500,
-                price_stars: 70,
-                emoji: "🍕",
-                category: "food",
-                popular: true
-            },
-            {
-                id: 3,
-                name: "🎮 Игра в Steam",
-                description: "Новая игра для отдыха",
-                price_rub: 1000,
-                price_stars: 140,
-                emoji: "🎮",
-                category: "digital"
-            },
-            {
-                id: 4,
-                name: "📚 Новая книга",
-                description: "Интересная книга для развития",
-                price_rub: 300,
-                price_stars: 40,
-                emoji: "📚",
-                category: "education"
-            },
-            {
-                id: 5,
-                name: "🎵 Месяц музыки",
-                description: "Подписка на музыкальный сервис",
-                price_rub: 250,
-                price_stars: 35,
-                emoji: "🎵",
-                category: "entertainment"
-            },
-            {
-                id: 6,
-                name: "😄 Улыбка автора",
-                description: "Гарантированная улыбка в ответ",
-                price_rub: 50,
-                price_stars: 7,
-                emoji: "😄",
-                category: "fun",
-                popular: true
-            },
-            {
-                id: 7,
-                name: "🌟 Звёзда удачи",
-                description: "Виртуальная звезда на удачу",
-                price_rub: 100,
-                price_stars: 15,
-                emoji: "🌟",
-                category: "fun"
-            },
-            {
-                id: 8,
-                name: "🎉 Виртуальный праздник",
-                description: "Поздравление с вашим праздником",
-                price_rub: 200,
-                price_stars: 30,
-                emoji: "🎉",
-                category: "fun"
-            },
-            {
-                id: 9,
-                name: "🏆 Топ донатер",
-                description: "Специальный статус в боте",
-                price_rub: 1000,
-                price_stars: 140,
-                emoji: "🏆",
-                category: "status"
-            },
-            {
-                id: 10,
-                name: "👑 Король поддержки",
-                description: "Высший статус поддержки",
-                price_rub: 2000,
-                price_stars: 280,
-                emoji: "👑",
-                category: "status"
-            }
-        ];
-        
-        let currentCurrency = 'rub';
-        let currentTab = 'catalog';
-        
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', function() {
-            renderProducts();
-            setupEventListeners();
-            
-            // Для Telegram Web App
-            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-                Telegram.WebApp.ready();
-                Telegram.WebApp.expand();
-                
-                // Кнопка "Открыть в боте"
-                Telegram.WebApp.MainButton.setText("Открыть в боте").show();
-                Telegram.WebApp.MainButton.onClick(() => {
-                    Telegram.WebApp.openTelegramLink('https://t.me/vamogatel_denga_bot');
-                });
-            }
-        });
-        
-        function setupEventListeners() {
-            // Основные табы
-            document.querySelectorAll('.main-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-                    document.getElementById(this.dataset.tab + '-panel').classList.add('active');
-                    
-                    currentTab = this.dataset.tab;
-                });
-            });
-            
-            // Валютные табы
-            document.querySelectorAll('.currency-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    document.querySelectorAll('.currency-tab').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    currentCurrency = this.dataset.currency;
-                    renderProducts();
-                });
-            });
-            
-            // Кнопки быстрой оплаты
-            document.querySelectorAll('.amount-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const amount = this.dataset.amount;
-                    const currency = this.dataset.currency;
-                    processPayment(amount, currency, 'Быстрая оплата');
-                });
-            });
-        }
-        
-        // Рендер товаров
-        function renderProducts() {
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '';
-            
-            products.forEach(product => {
-                const price = currentCurrency === 'rub' ? product.price_rub : product.price_stars;
-                const currencySymbol = currentCurrency === 'rub' ? '₽' : '⭐';
-                const otherPrice = currentCurrency === 'rub' ? 
-                    `⭐ ${product.price_stars} звёзд` : 
-                    `${product.price_rub} ₽`;
-                
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    ${product.popular ? '<div class="product-badge">🔥 Популярный</div>' : ''}
-                    <div class="product-emoji">${product.emoji}</div>
-                    <h3 class="product-name">${product.name}</h3>
-                    <p style="color: #666; margin-bottom: 15px;">${product.description}</p>
-                    
-                    <div class="product-price ${currentCurrency === 'rub' ? 'price-rub' : 'price-stars'}">
-                        ${price} ${currencySymbol}
-                    </div>
-                    
-                    <p style="color: #999; font-size: 0.9em;">
-                        или ${otherPrice}
-                    </p>
-                    
-                    <div class="buy-buttons">
-                        <button class="buy-btn buy-rub" onclick="buyProduct(${product.id}, 'rub')">
-                            💰 ${product.price_rub} ₽
-                        </button>
-                        <button class="buy-btn buy-stars" onclick="buyProduct(${product.id}, 'stars')">
-                            ⭐ ${product.price_stars} звёзд
-                        </button>
-                    </div>
-                `;
-                
-                container.appendChild(productCard);
-            });
-        }
-        
-        // Покупка товара
-        function buyProduct(productId, currency) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-            
-            const amount = currency === 'rub' ? product.price_rub : product.price_stars;
-            processPayment(amount, currency, product.name);
-        }
-        
-        // Обработка платежа
-        function processPayment(amount, currency, description) {
-            const rubAmount = currency === 'rub' ? amount : amount * 7;
-            const starsAmount = currency === 'stars' ? amount : Math.round(rubAmount / 7);
-            
-            const message = `🎉 <b>${description}</b>\n\n` +
-                          `Сумма: ${amount} ${currency === 'rub' ? '₽' : '⭐'}\n` +
-                          `В другой валюте: ${currency === 'rub' ? `⭐ ${starsAmount} звёзд` : `${rubAmount} ₽`}\n\n` +
-                          `${currency === 'rub' ? 
-                            '💳 Для оплаты переведите на карту:\n' +
-                            '<code>2200 **** **** 1234</code>\n\n' +
-                            'В комментарии укажите ваш username' :
-                            '⭐ Для оплаты отправьте звёзды боту @vamogatel_denga_bot\n' +
-                            'Как отправить:\n' +
-                            '1. Откройте бота на телефоне\n' +
-                            '2. Нажмите на значок ₿\n' +
-                            '3. Выберите количество\n' +
-                            '4. Отправьте'}`;
-            
-            // Показываем уведомление
-            showNotification(message);
-            
-            // Для Telegram Web App отправляем данные в бота
-            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-                Telegram.WebApp.sendData(JSON.stringify({
-                    action: 'payment_request',
-                    amount: amount,
-                    currency: currency,
-                    description: description,
-                    rub_amount: rubAmount,
-                    stars_amount: starsAmount
-                }));
-            }
-        }
-        
-        // Своя сумма
-        function processCustomPayment() {
-            const amountInput = document.getElementById('customAmount');
-            const currencySelect = document.getElementById('customCurrency');
-            
-            const amount = parseFloat(amountInput.value);
-            const currency = currencySelect.value;
-            
-            if (!amount || amount <= 0) {
-                showNotification('⚠️ Введите корректную сумму!');
-                return;
-            }
-            
-            processPayment(amount, currency, 'Своя сумма');
-            amountInput.value = '';
-        }
-        
-        // Показ уведомления
-        function showNotification(message) {
-            // Создаем overlay
-            const overlay = document.createElement('div');
-            overlay.style.cssText = `
-                position: fixed;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                background: rgba(0,0,0,0.7);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000;
-                animation: fadeIn 0.3s;
-            `;
-            
-            // Создаем модальное окно
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                background: white;
-                padding: 40px;
-                border-radius: 20px;
-                max-width: 500px;
-                width: 90%;
-                text-align: center;
-                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-                animation: slideUp 0.3s;
-            `;
-            
-            modal.innerHTML = `
-                <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
-                <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 20px;">
-                    Запрос на оплату отправлен!
-                </div>
-                <div style="text-align: left; margin-bottom: 30px; font-size: 1.1em; line-height: 1.5;">
-                    ${message}
-                </div>
-                <div style="display: flex; gap: 15px; justify-content: center;">
-                    <button onclick="this.closest('div').parentElement.remove()" style="
-                        background: #667eea; color: white; border: none; padding: 15px 30px;
-                        border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer;
-                    ">
-                        Понятно
-                    </button>
-                    <button onclick="openBot()" style="
-                        background: #28a745; color: white; border: none; padding: 15px 30px;
-                        border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer;
-                    ">
-                        📱 Открыть бота
-                    </button>
-                </div>
-            `;
-            
-            overlay.appendChild(modal);
-            document.body.appendChild(overlay);
-            
-            // Закрытие по клику на overlay
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) {
-                    overlay.remove();
-                }
-            });
-        }
-        
-        function openBot() {
-            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-                Telegram.WebApp.openTelegramLink('https://t.me/vamogatel_denga_bot');
-            } else {
-                window.open('https://t.me/vamogatel_denga_bot', '_blank');
-            }
-        }
-        
-        // Добавляем CSS анимации
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            
-            @keyframes slideUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html>
+        <div class="panel" id="custom
